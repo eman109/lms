@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -54,5 +56,21 @@ class User extends Authenticatable
         return Str::length($initials) > 1
             ? Str::substr($initials, 0, 1).Str::substr($initials, -1)
             : $initials;
+    }
+
+    public function taughtCourse() : HasMany
+    {
+        return $this->hasMany(Course::class, 'instructor_id');
+
+    }
+
+    public function enrolledCourses():BelongsToMany
+    {
+        return $this->belongsToMany(Course::class, 'enrollments')->withTimestamps();
+    }
+
+    public function completedLessons():BelongsToMany
+    {
+        return $this->belongsToMany(Lesson::class)->withTimestamps();
     }
 }
