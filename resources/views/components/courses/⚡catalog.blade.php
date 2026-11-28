@@ -33,7 +33,9 @@ new class extends Component
 
     @forelse ($this->courses as $course)
         <div wire:key="course-{{ $course->id }}" class="mb-4 rounded border p-4">
-            <h3 class="text-lg font-semibold">{{ $course->title }}</h3>
+            <h3 class="text-lg font-semibold">
+                <a href="{{route('courses.show', $course)}}" class="underline">{{$course->title}}</a>
+            </h3>
             <p>{{ $course->description }}</p>
             <small>{{ $course->lessons_count }} lessons</small>
         </div>
