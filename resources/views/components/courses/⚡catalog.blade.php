@@ -7,7 +7,6 @@ use Livewire\Component;
 new class extends Component
 {
     public string $search = '';
-    //the string we keep memory of what typed in it, public means the html below can change it later
 
     #[Computed]
     public function courses()
@@ -20,6 +19,8 @@ new class extends Component
             ->get();
     }
 };
+
+?>
 
 <div class="mx-auto max-w-3xl p-6">
     <input
